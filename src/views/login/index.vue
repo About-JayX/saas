@@ -12,15 +12,15 @@
         </h3>
       </div>
 
-      <el-form-item prop="moblie">
+      <el-form-item prop="mobile">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="moblie"
-          v-model="loginForm.moblie"
+          ref="mobile"
+          v-model="loginForm.mobile"
           placeholder="用户名"
-          name="moblie"
+          name="mobile"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -72,13 +72,13 @@ export default {
   data() {
     return {
       loginForm: {
-        moblie: "13800000002",
+        mobile: "13800000002",
         password: "123456",
       },
       // 效验表单规则
       loginRules: {
         // 效验手机号
-        moblie: [
+        mobile: [
           { required: true, trigger: "blur", message: "请输入手机号" },
           {
             pattern:
@@ -111,9 +111,22 @@ export default {
     },
     // 全局表单效验
     handleLogin() {
-      this.$refs.loginForm.validate((v) => {
+      this.$refs.loginForm.validate(async (v) => {
         if (v) {
           // 发送请求获取token
+          try {
+            await this.$store.dispatch("user/login", this.loginForm);
+            if (this.$route.query.back) {
+              this.$router.push(this.$route.query.back);
+            } else {
+              this.$router.push('/');
+            }
+            this.$message.success("登陆成功!");
+          } catch (err) {
+            this.$message.error(err);
+            this.loading = false;
+            return false;
+          }
         } else {
           return false;
         }
