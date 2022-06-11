@@ -119,7 +119,7 @@ export default {
             if (this.$route.query.back) {
               this.$router.push(this.$route.query.back);
             } else {
-              this.$router.push('/');
+              this.$router.push("/");
             }
             this.$message.success("登陆成功!");
           } catch (err) {

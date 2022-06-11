@@ -19,9 +19,14 @@ import "@/permission"; // permission control
 Vue.use(ElementUI, { locale });
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
-
 Vue.config.productionTip = false;
 
+// 导入自定义指令
+import directive from "./directives";
+let keys = Object.keys(directive);
+keys.forEach((item) => {
+  Vue.directive(item, directive[item]);
+});
 new Vue({
   el: "#app",
   router,

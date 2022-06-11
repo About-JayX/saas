@@ -1,34 +1,31 @@
 <template>
-  <div class="sidebar-logo-container" :class="{'collapse':collapse}">
+  <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <transition name="sidebarLogoFade">
-      <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 v-else class="sidebar-title">{{ title }} </h1>
-      </router-link>
-      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 class="sidebar-title">{{ title }} </h1>
-      </router-link>
+      <div v-if="collapse" class="sidebar-logo-link">
+        <img v-if="logo" :src="logo" class="sidebar-logo" />
+      </div>
+      <div v-else class="sidebar-logo-link">
+        <img v-if="logo" :src="logo" class="sidebar-logo" />
+      </div>
     </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SidebarLogo',
+  name: "SidebarLogo",
   props: {
     collapse: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      title: 'Vue Admin Template',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
-    }
-  }
-}
+      logo: require("@/assets/common/logo.png"),
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -42,11 +39,9 @@ export default {
 }
 
 .sidebar-logo-container {
+  margin: 8px 0px;
   position: relative;
   width: 100%;
-  height: 50px;
-  line-height: 50px;
-  background: #2b2f3a;
   text-align: center;
   overflow: hidden;
 
@@ -55,27 +50,15 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
-      vertical-align: middle;
-      margin-right: 12px;
-    }
-
-    & .sidebar-title {
-      display: inline-block;
-      margin: 0;
-      color: #fff;
-      font-weight: 600;
-      line-height: 50px;
-      font-size: 14px;
-      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      object-fit: contain;
       vertical-align: middle;
     }
   }
 
   &.collapse {
     .sidebar-logo {
-      margin-right: 0px;
+      width: 80%;
+      height: 30px;
     }
   }
 }
