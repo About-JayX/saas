@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Hamburger from "@/components/Hamburger";
 
 export default {
@@ -44,12 +44,16 @@ export default {
     ...mapGetters(["sidebar", "userInfo", "staffPhoto"]),
   },
   methods: {
+    // 获取vuex中user/actions中的方法
+    ...mapActions("user", ["logout"]),
     toggleSideBar() {
       this.$store.dispatch("app/toggleSideBar");
     },
     handleCommand(command) {
       if (command === "logout") {
-        console.log(this.staffPhoto);
+        this.$message.info('您已退出当前登录账户！')
+        this.logout();
+        this.$router.push('/login')
       }
     },
   },

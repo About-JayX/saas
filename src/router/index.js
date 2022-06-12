@@ -5,7 +5,15 @@ Vue.use(Router);
 
 /* Layout */
 import Layout from "@/layout";
-
+// 导入动态路由
+import approvals from "./modules/approvals";
+import attendances from "./modules/attendances";
+import departments from "./modules/departments";
+import employees from "./modules/employees";
+import permission from "./modules/permission";
+import salarys from "./modules/salarys";
+import setting from "./modules/setting";
+import social from "./modules/social";
 export const constantRoutes = [
   {
     name: "login",
@@ -18,19 +26,20 @@ export const constantRoutes = [
     name: "notFound",
     path: "/404",
     component: () => import("@/views/404"),
+    // 如果hidden 为true 则不显示在侧边栏
     hidden: true,
   },
 
   {
-    path: "/",
+    path: "/dashboard",
     component: Layout,
     redirect: "/dashboard",
     children: [
       {
-        path: "dashboard",
-        name: "Dashboard",
+        path: "",
+        name: "dashboard",
         component: () => import("@/views/dashboard/index"),
-        meta: { title: "Dashboard", icon: "dashboard" },
+        meta: { title: "首页", icon: "dashboard" },
       },
     ],
   },
@@ -39,11 +48,21 @@ export const constantRoutes = [
   { path: "*", redirect: "/404", hidden: true },
 ];
 
+const syncRouter = [
+  departments,
+  employees,
+  setting,
+  salarys,
+  social,
+  attendances,
+  approvals,
+  permission,
+];
 const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes,
+    routes: [...constantRoutes, ...syncRouter],
   });
 
 const router = createRouter();
