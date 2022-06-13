@@ -10,7 +10,8 @@
           <!-- 部门列表 -->
           <el-tree :data="deptList">
             <TreeTool
-              @open="open"
+              @open="open($event)"
+              @openEdit="openEdit($event)"
               :data="data"
               slot-scope="{ data }"
               style="width: 100%"
@@ -22,7 +23,12 @@
     </el-card>
     <!-- v-model: @input="value=$event" -->
     <!-- <adddept :addShow="showAdd" @update:addShow="showAdd = $event"></adddept> -->
-    <AddDept :addShow.sync="addShow" :pid="pid" @updatedata="getDepList"/>
+    <AddDept
+      :addShow.sync="addShow"
+      :pid="pid"
+      @updatedata="getDepList"
+      ref="adddept"
+    />
   </div>
 </template>
 
@@ -78,6 +84,12 @@ export default {
       this.addShow = true;
       // 从树状结构组件传出id使用$event接受传参到函数
       this.pid = id;
+    },
+    // 打开编辑页面
+    openEdit(id) {
+      this.addShow = true;
+      // 编辑页面打开是调用组件内的方法
+      this.$refs.adddept.getDeptDetail(id);
     },
   },
   created() {

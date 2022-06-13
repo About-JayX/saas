@@ -58,8 +58,10 @@ export default {
           });
       }
       //   增加部门
-      if (command == "add") {
-        this.$emit("open",this.data.id);
+      else if (command == "add") {
+        this.$emit("open", this.data.id);
+      } else {
+        this.$emit("openEdit", this.data.id);
       }
     },
   },

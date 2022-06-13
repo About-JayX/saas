@@ -14,11 +14,14 @@ import router from "./router";
 
 import "@/icons"; // icon
 import "@/permission"; // permission control
-
+// 导入自己封装的插件
+import plugin from "./plugin";
+Vue.use(plugin);
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale });
+// Vue.use(ElementUI, { locale });
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
+Vue.use(ElementUI);
 Vue.config.productionTip = false;
 
 // 导入自定义指令
