@@ -12,8 +12,7 @@
               >新增角色</el-button
             >
             <el-table
-              algin="center"
-              ref="mytable"
+             
               highlight-current-row
               border
               :data="roleList"
@@ -25,12 +24,12 @@
                   {{ scope.row.name }}
                 </template>
               </el-table-column>
-              <el-table-column prop="describe" sortable label="描述">
+              <el-table-column sortable label="描述">
                 <template v-slot="scope">
                   {{ scope.row.description }}
                 </template>
               </el-table-column>
-              <el-table-column prop="operate" label="操作" width="180">
+              <el-table-column label="操作" width="180">
                 <template v-slot="scope">
                   <div class="btn">
                     <button size="mini">分配权限</button>

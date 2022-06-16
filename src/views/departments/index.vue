@@ -5,10 +5,10 @@
       <el-tabs v-model="activeTab">
         <el-tab-pane label="用户管理" name="userManage"></el-tab-pane>
         <div class="content">
-          <TreeTool :data="comData" @open="open($event)" />
+          <TreeTool :data="comData" @open="open($event)"    style="width:100%"/>
           <el-divider style="width: 50%"></el-divider>
           <!-- 部门列表 -->
-          <el-tree :data="deptList">
+          <el-tree :data="deptList" style="width:100%">
             <TreeTool
               @open="open($event)"
               @openEdit="openEdit($event)"
@@ -24,6 +24,7 @@
     <!-- v-model: @input="value=$event" -->
     <!-- <adddept :addShow="showAdd" @update:addShow="showAdd = $event"></adddept> -->
     <AddDept
+   
       :addShow.sync="addShow"
       :pid="pid"
       @updatedata="getDepList"
@@ -104,6 +105,9 @@ export default {
   .box-card {
     padding: 20px 40px;
     .content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       padding: 30px 80px 10px;
       .el-divider {
         width: 100%;

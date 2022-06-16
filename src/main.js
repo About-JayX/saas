@@ -11,7 +11,7 @@ import "@/styles/index.scss"; // global css
 import App from "./App";
 import store from "./store";
 import router from "./router";
-
+import 'font-awesome/css/font-awesome.min.css'
 import "@/icons"; // icon
 import "@/permission"; // permission control
 // 导入自己封装的插件
@@ -23,13 +23,18 @@ Vue.use(plugin);
 // Vue.use(ElementUI)
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
-
+// 导入过滤器
+import * as filterObj from "./filters";
+Object.keys(filterObj).forEach((item) => {
+  Vue.filter(item, filterObj[item]);
+});
 // 导入自定义指令
 import directive from "./directives";
 let keys = Object.keys(directive);
 keys.forEach((item) => {
   Vue.directive(item, directive[item]);
 });
+
 new Vue({
   el: "#app",
   router,
