@@ -1,26 +1,40 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-text">name</div>
+  <div class="dashboard">
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <el-card>
+          <div class="title">工作日历</div>
+          <div class="line"></div>
+          <workcalendar></workcalendar>
+        </el-card>
+      </el-col>
+      <el-col :span="12">
+        <el-card> 右侧 </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-
+import workcalendar from "./components/workcalendar.vue";
 export default {
-  name: 'dashboard',
-  computed: {
-  }
-}
+  components: {
+    workcalendar,
+  },
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .dashboard {
-  &-container {
-    margin: 30px;
+  margin: 20px;
+  .title {
+    font-size: 24px;
   }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin-top: 20px;
   }
 }
 </style>

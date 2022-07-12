@@ -48,6 +48,7 @@ const actions = {
     // 定义一个对象，将两次获取到的对象展开存储在一个新的对象中
     completeUeserInfo = { ...res.data, ...res1.data };
     ctx.commit("setUserInfo", completeUeserInfo);
+    return completeUeserInfo
   },
   logout(ctx) {
     // 删除vuex中的token

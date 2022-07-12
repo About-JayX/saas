@@ -7,9 +7,7 @@
       class="login-form"
     >
       <div class="title-container">
-        <h3 class="title">
-          <img src="~@/assets/common/login-logo.png" alt="" />
-        </h3>
+        <h3 class="title">Sass后台管理项目</h3>
       </div>
 
       <el-form-item prop="mobile">
@@ -211,8 +209,10 @@ $light_gray: #eee;
   }
 
   .title-container {
-    vertical-align: middle;
-    margin: 0 auto 40px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 32px;
+    color: white;
   }
 
   .show-pwd {
@@ -224,5 +224,6 @@ $light_gray: #eee;
     cursor: pointer;
     user-select: none;
   }
+
 }
 </style>

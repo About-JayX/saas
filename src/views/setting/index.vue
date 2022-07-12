@@ -11,12 +11,7 @@
               @click="addShow = true"
               >新增角色</el-button
             >
-            <el-table
-             
-              highlight-current-row
-              border
-              :data="roleList"
-            >
+            <el-table highlight-current-row border :data="roleList">
               <el-table-column label="序号" width="180" type="index">
               </el-table-column>
               <el-table-column label="角色" sortable width="180">
@@ -32,7 +27,9 @@
               <el-table-column label="操作" width="180">
                 <template v-slot="scope">
                   <div class="btn">
-                    <button size="mini">分配权限</button>
+                    <button size="mini" @click="openper(scope.row.id)">
+                      分配权限
+                    </button>
                     <button size="mini" @click="openEdit(scope.row.id)">
                       修改
                     </button>
@@ -75,6 +72,7 @@
         <el-button type="primary" @click="addManage">确 定</el-button>
       </div>
     </el-dialog>
+    <setrole :perShow.sync="perShow" ref="setrole"></setrole>
   </div>
 </template>
 
@@ -88,8 +86,13 @@ import {
 } from "@/api";
 
 export default {
+  components: {
+    setrole: () => import("./components/setrole.vue"),
+  },
+
   data() {
     return {
+      perShow: false,
       // 新增面板
       addShow: false,
       form: {
@@ -106,6 +109,12 @@ export default {
     };
   },
   methods: {
+    // 打开分配权限面板
+    openper(id) {
+      this.perShow = true;
+      this.$refs.setrole.getPerList();
+      this.$refs.setrole.getRole(id);
+    },
     // 获取角色列表
     async getRoleList() {
       let res = await getRoleListAPI({

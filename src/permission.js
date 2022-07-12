@@ -20,7 +20,15 @@ router.beforeEach(async (to, from, next) => {
       // 判断vuex中是否存在数据，不存在则发送请求获取
       if (!store.getters.username) {
         // 先获取完成数据之后放行，所以调用await
-        await store.dispatch("user/getUserInfo");
+        let res = await store.dispatch("user/getUserInfo");
+        let mymenus = res.roles.menus;
+        let newRouter = await store.dispatch("permission/setRouter", mymenus);
+        router.addRoutes([...newRouter, {
+          path: "*",
+          redirect: "/404",
+          hidden: true,
+        }]);
+        return next(to.path);
       }
       return next();
     }

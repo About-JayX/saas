@@ -14,6 +14,7 @@ import permission from "./modules/permission";
 import salarys from "./modules/salarys";
 import setting from "./modules/setting";
 import social from "./modules/social";
+import store from "@/store";
 export const constantRoutes = [
   {
     name: "login",
@@ -45,10 +46,10 @@ export const constantRoutes = [
   },
 
   // 404 page must be placed at the end !!!
-  { path: "*", redirect: "/404", hidden: true },
+  // { path: "*", redirect: "/404", hidden: true },
 ];
 
-const syncRouter = [
+export const syncRouter = [
   departments,
   employees,
   setting,
@@ -62,7 +63,7 @@ const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: [...constantRoutes, ...syncRouter],
+    routes: [...constantRoutes],
   });
 
 const router = createRouter();

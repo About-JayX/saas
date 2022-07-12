@@ -1,7 +1,19 @@
 <template>
   <div class="detail">
     <el-card>
-      <el-tabs v-model="activeName">
+      <el-button class="backbtn" type="primary " size="small" @click="back()"
+        >返回</el-button
+      >
+      <el-button
+        class="backbtn"
+        type="primary "
+        size="small"
+        @click="toprint"
+        v-if="activeName != 'first'"
+        >打印</el-button
+      >
+
+      <el-tabs v-model="activeName" style="margin-top: 30px">
         <el-tab-pane label="登陆账户设置" name="first">
           <div class="my-form">
             <el-form
@@ -31,9 +43,11 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="个人详情" name="second"
-          ><userInfo></userInfo
+          ><userInfo @updateEmp="getStaffUserInfo" ref="userInfo"></userInfo
         ></el-tab-pane>
-        <el-tab-pane label="岗位信息" name="third">岗位信息</el-tab-pane>
+        <el-tab-pane label="岗位信息" name="third"
+          ><jobInfo></jobInfo
+        ></el-tab-pane>
       </el-tabs>
     </el-card>
   </div>
@@ -41,10 +55,12 @@
 
 <script>
 import userInfo from "../components/userInfo.vue";
+import jobInfo from "../components/jobInfo.vue";
 import { getStaffUserInfoAPI, saveEmpAPI } from "@/api";
 export default {
   components: {
     userInfo,
+    jobInfo,
   },
   data() {
     return {
@@ -62,23 +78,31 @@ export default {
         ],
       },
       form: {
-        id: this.$route.query.id,
+        id: localStorage.getItem("chenckId"),
         username: "",
         password: "",
       },
     };
   },
   methods: {
+    back() {
+      this.$router.back();
+      localStorage.removeItem("chenckId");
+    },
+    toprint() {
+      this.$router.push(`/employees/print?active=${this.activeName}`);
+    },
     async getStaffUserInfo() {
       let res = await getStaffUserInfoAPI(this.form.id);
       this.form = res.data;
     },
     async updateEmp() {
       let res = await saveEmpAPI(this.form);
-      console.log(res);
+      await this.$store.dispatch("user/getUserInfo");
       this.$message.success("修改信息成功！");
       this.$refs.form.resetFields();
       this.getStaffUserInfo();
+      this.$refs.userInfo.getUserInfo();
     },
     psShow() {
       this.passwordShow = !this.passwordShow;

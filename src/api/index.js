@@ -1,5 +1,5 @@
 // 统一暴露文件
-import { login, getUserInfo, getStaffUserInfo } from "./user";
+import { login, getUserInfo, getStaffUserInfo, setUser } from "./user";
 import {
   getDeptList,
   delDept,
@@ -8,13 +8,7 @@ import {
   updateDept,
 } from "./departments";
 
-import {
-  getRoleList,
-  addRole,
-  delRole,
-  RoleDetails,
-  updateRole,
-} from "./setting";
+import { addRole, delRole, RoleDetails, updateRole } from "./setting";
 
 import {
   getSimpleList,
@@ -24,6 +18,7 @@ import {
   importEmpl,
   saveEmp,
 } from "./employess";
+import { getRoleList, getRole, setRolePer } from "./role";
 export const loginAPI = login;
 export const getUserInfoAPI = getUserInfo;
 export const getStaffUserInfoAPI = getStaffUserInfo;
@@ -43,3 +38,6 @@ export const addEmpAPI = addEmp;
 export const delEmpAPI = delEmp;
 export const importEmplAPI = importEmpl;
 export const saveEmpAPI = saveEmp;
+export const setUserAPI = setUser;
+export const getRoleAPI = getRole;
+export const setRolePerAPI = setRolePer;

@@ -59,6 +59,7 @@
         <el-col :span="12">
           <el-form-item label="员工头像">
             <!-- 放置上传图片 -->
+            <imgupload :imgUrl.sync="userInfo.staffPhoto"></imgupload>
           </el-form-item>
         </el-col>
       </el-row>
@@ -390,13 +391,13 @@
 <!-- 数据 -->
 <script>
 import EmployeeEnum from "@/api/constant/employees";
-import { getStaffUserInfoAPI } from "@/api";
+import { getStaffUserInfoAPI, saveEmpAPI } from "@/api";
 export default {
   data() {
     return {
-      id: this.$route.query.id,
+      imgUrl: "",
       EmployeeEnum, // 员工枚举数据
-      userInfo: {},
+      userInfo: { id: this.$route.query.id },
       formData: {
         userId: "",
         username: "", // 用户名
@@ -463,12 +464,18 @@ export default {
     };
   },
   methods: {
-    saveUser() {},
+    async saveUser() {
+      let res = await saveEmpAPI(this.userInfo);
+      this.$message.success("修改员工详情成功！");
+      // 修改成功后发送指令给父组件更新登陆账户设置页面数据
+      this.$store.dispatch('user/getUserInfo')
+      this.$emit("updateEmp");
+    },
     savePersonal() {},
     async getUserInfo() {
-      let res = await getStaffUserInfoAPI(this.id);
+      let res = await getStaffUserInfoAPI(this.userInfo.id);
       this.userInfo = res.data;
-      this.userInfo.timeOfEntry = new Date(this.userInfo.timeOfEntry)
+      this.userInfo.timeOfEntry = new Date(this.userInfo.timeOfEntry);
     },
   },
   created() {

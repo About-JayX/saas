@@ -3,6 +3,7 @@ import Layout from "@/layout";
 import employees from "@/views/employees";
 import importEmp from "@/views/employees/components/importEmp";
 import detail from "@/views/employees/detail";
+import print from "@/views/employees/components/print";
 export default {
   path: "/employees",
   component: Layout,
@@ -15,5 +16,6 @@ export default {
     },
     { path: "import", name: "importEmp", component: importEmp, hidden: true },
     { path: "detail", name: "detail", component: detail, hidden: true },
+    { path: "print", name: "print", component: print, hidden: true },
   ],
 };

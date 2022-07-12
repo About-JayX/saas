@@ -7,7 +7,7 @@
         @toggleClick="toggleSideBar"
       />
       <div class="title">
-        <div>江苏传智博客教育科技股份有限公司</div>
+        <div>我是一个公司的名字</div>
         <span>体验版</span>
       </div>
     </div>

@@ -51,7 +51,7 @@ request.interceptors.response.use(
       Message.error("登陆过期，请重新登录！");
       // 保存过期前的登录信息
       router.push("/login?back=" + location.href.split("#")[1]);
-      return Promise.reject(err)
+      return Promise.reject(err);
     }
   }
 );

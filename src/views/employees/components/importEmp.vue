@@ -44,29 +44,36 @@ export default {
     },
     async onSuccess({ results }) {
       // 简历中英对照字典
-      const obj = {
-        入职日期: "timeOfEntry",
-        姓名: "username",
-        工号: "workNumber",
-        手机号: "mobile",
-        转正日期: "correctionTime",
-      };
+      // const obj = {
+      //   入职日期: "timeOfEntry",
+      //   姓名: "username",
+      //   工号: "workNumber",
+      //   手机号: "mobile",
+      //   转正日期: "correctionTime",
+      // };
 
-      const newSults = results.map((item) => {
-        const keyArr = Object.keys(item);
-        const newObj = {};
-        keyArr.forEach((key) => {
-          const mykey = obj[key];
-          let myval;
-          if (key == "入职日期" || key == "转正日期") {
-            myval = this.turnday(item[key]);
-          } else {
-            myval = item[key];
-          }
-          newObj[mykey] = myval;
-        });
-        this.total++;
-        return newObj;
+      let newSults = results.map((item) => {
+        return {
+          timeOfEntry: this.$options.filters.Timeformat(item["入职日期"]),
+          username: item["姓名"],
+          workNumber: item["工号"],
+          mobile: item["手机号"],
+          correctionTime: this.$options.filters.Timeformat(item["转正日期"]),
+        };
+        // const keyArr = Object.keys(item);
+        // const newObj = {};
+        // keyArr.forEach((key) => {
+        //   const mykey = obj[key];
+        //   let myval;
+        //   if (key == "入职日期" || key == "转正日期") {
+        //     myval = this.turnday(item[key]);
+        //   } else {
+        //     myval = item[key];
+        //   }
+        //   newObj[mykey] = myval;
+        // });
+        // this.total++;
+        // return newObj;
       });
       await importEmplAPI(newSults);
       this.$message.success("批量导入员工成功！");

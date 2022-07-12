@@ -1,15 +1,6 @@
 // 导入 axios
 import request from "@/utils/request";
 
-// 获取所有的角色列表
-export function getRoleList(params) {
-  return request({
-    url: "/sys/role",
-    method: "GET",
-    params,
-  });
-}
-
 // 添加角色
 export function addRole(data) {
   return request({

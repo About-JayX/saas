@@ -11,7 +11,7 @@ import "@/styles/index.scss"; // global css
 import App from "./App";
 import store from "./store";
 import router from "./router";
-import 'font-awesome/css/font-awesome.min.css'
+import "font-awesome/css/font-awesome.min.css";
 import "@/icons"; // icon
 import "@/permission"; // permission control
 // 导入自己封装的插件
@@ -22,7 +22,9 @@ Vue.use(plugin);
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 Vue.use(ElementUI);
+import print from "vue-print-nb";
 Vue.config.productionTip = false;
+Vue.use(print);
 // 导入过滤器
 import * as filterObj from "./filters";
 Object.keys(filterObj).forEach((item) => {
@@ -35,9 +37,11 @@ keys.forEach((item) => {
   Vue.directive(item, directive[item]);
 });
 
+import i18n from "@/lang";
 new Vue({
   el: "#app",
-  router,
+  i18n,
+  router: router,
   store,
   render: (h) => h(App),
 });

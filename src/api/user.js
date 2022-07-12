@@ -20,4 +20,12 @@ export function getStaffUserInfo(id) {
     url: `/sys/user/${id}`,
   });
 }
+
+export function setUser(data) {
+  request({
+    url: "/sys/user/assignRoles",
+    method: "put",
+    data,
+  });
+}
 export function logout() {}

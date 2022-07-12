@@ -43,7 +43,7 @@ export default {
     return {
       // 标题数据
       comData: {
-        name: "江苏传智播客教育科技股份有限公司",
+        name: "我是一个公司的名字",
         manager: "负责人",
         isRoot: true,
       },
